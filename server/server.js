@@ -2,6 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+
+const routes  = require('./routes/index')
+
 const mongoose = require('mongoose');
 //require("../config")
 
@@ -12,7 +15,13 @@ console.log(mongoURI)
 mongoose.connect(mongoURI)
 
 //mongoose.connect(mongoURI)
-app.listen(port, ()=>{console.log(`App listening on ${port}`)})
+
 
 //Parsing
 app.use(bodyParser.json())
+
+//routes
+app.use('api',routes)
+
+
+app.listen(port, ()=>{console.log(`App listening on ${port}`)})
