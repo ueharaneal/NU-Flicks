@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-const routes  = require('./routes/index')
+const routes = require('./routes/index') 
 
 const mongoose = require('mongoose');
 //require("../config")
@@ -24,4 +24,4 @@ app.use(bodyParser.json())
 app.use('api',routes)
 
 
-app.listen(port, ()=>{console.log(`App listening on ${port}`)})
+app.listen(port, ()=> console.log(`Server is running on Port ${port}`))

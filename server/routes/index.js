@@ -1,26 +1,27 @@
 const express = require('express');
-const router = require('router');
+const router = express.Router();
 //route
-const authRoutes = ('./auth.route.js');
-const articlesRoutes = ('./article.route.js');
-const userRoutes = ('./user.route.js')
+const authRoutes = require('./auth.route.js')
+const articlesRoutes = require('./articles.route.js');
+const userRoutes = require('./user.route.js')
 
 const routesIndex = [
     {
         path: '/auth',
-        route: authRoutes,
-    },
-    {
+        route: authRoutes 
+    },{
         path: '/articles',
-        route: articlesRoutes,
+        route: articlesRoutes
     },
     {
-        path: '/users',
-        route: userRoutes,
+        path:'/user',
+        route: userRoutes
     }
 ]
 
 routesIndex.forEach((route)=>{
     router.use(route.path, route.route)
 })
-module.exports = router;
+
+module.exports = router 
+
