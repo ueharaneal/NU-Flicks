@@ -1,4 +1,6 @@
+
 const authController = {
+
     async register(req,res,next){
         try{
 
@@ -8,5 +10,4 @@ const authController = {
     }
 }
 
-
-module.exports = authController;
+module.exports=authController;
