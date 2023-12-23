@@ -5,7 +5,7 @@ const authController = {
         try{
 
         }catch(error){
-
+            console.error(error, "this is the error")// delete
         }
     }
 }
