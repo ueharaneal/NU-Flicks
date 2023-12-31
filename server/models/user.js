@@ -52,7 +52,10 @@ const userSchema = mongoose.Schema({
 });
 
 
-userSchema.stati
+userSchema.statics.emailTaken = async(email)=>{
+  const user = await this.findOne({email})
+  return !!user
+}
 
 const User = mongoose.model("User", userSchema);
 module.exports = { User, isTaken };
