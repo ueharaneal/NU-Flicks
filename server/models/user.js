@@ -52,11 +52,13 @@ const userSchema = mongoose.Schema({
   },
 });
 
-
+//this function is hashing the password
 userSchema.pre('save', async function(next){
   let user = this
   if(user.isModified('password')){
-
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(user.password, salt)
+    user.password = hash;
   }  
   next();
 })
@@ -64,6 +66,11 @@ userSchema.pre('save', async function(next){
 userSchema.statics.emailTaken = async(email)=>{
   const user = await this.findOne({email})
   return !!user
+}
+
+//currently working on this function
+userSchema.methods.generateAuthToken = function(){
+
 }
 
 const User = mongoose.model("User", userSchema);

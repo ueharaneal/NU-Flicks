@@ -22,4 +22,10 @@ const createUser = async() => {
     }
 }
 
-module.exports = { createUser }
+const getAuthToken = (user) =>{
+    const token  = user.generateAuthToken();
+    return token
+}
+
+
+module.exports = { createUser, getAuthToken }
