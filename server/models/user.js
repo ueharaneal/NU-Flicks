@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 const validator = require("validator");
-
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const userSchema = mongoose.Schema({
   email: {
     type: String,
@@ -51,6 +52,14 @@ const userSchema = mongoose.Schema({
   },
 });
 
+
+userSchema.pre('save', async function(next){
+  let user = this
+  if(user.isModified('password')){
+
+  }  
+  next();
+})
 
 userSchema.statics.emailTaken = async(email)=>{
   const user = await this.findOne({email})

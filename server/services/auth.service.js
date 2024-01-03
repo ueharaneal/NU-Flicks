@@ -1,6 +1,8 @@
 const httpStatus = require('http-status')
 const { User } = require('../models/user')
-
+//in this file we are multiple functions related to OAUTH
+//we are creating a function called createUser
+//we are creating a function that hashes the users passwords 
 const createUser = async() => {
     try{
         if(await User.emailTaken(email)){
@@ -10,7 +12,7 @@ const createUser = async() => {
                 email,
                 password
             });
-            await user.save()
+            await user.save();
             return user
         }
 

@@ -9,7 +9,7 @@ const authController = {
             const user = await authServices.createUser(email,password)
         }
         catch(error){
-            res.status(httpStatus.BAD_REQUEST).send(error.message)
+            res.status(httpStatus).send(error.message)
         }
     }
 }
