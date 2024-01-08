@@ -53,13 +53,15 @@ const userSchema = mongoose.Schema({
 });
 
 //this function is hashing the password
+//.pre is used as a middleware prior to whenever the save function is ran
 userSchema.pre('save', async function(next){
-  let user = this
+
+  let user = this;
   if(user.isModified('password')){
     const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(user.password, salt)
+    const hash  = await bcrypt.hash(user.password, salt);
     user.password = hash;
-  }  
+  } 
   next();
 })
 
@@ -70,8 +72,12 @@ userSchema.statics.emailTaken = async(email)=>{
 
 //currently working on this function
 userSchema.methods.generateAuthToken = function(){
-
+  let user = this
+  const userObj = {sub: user._id.toHexString(), email:user.email}
+  const token = jwt.sign(userObj, process.env.DB_SECRET, {expiresIn:'1d'})
+  return token
 }
+
 
 const User = mongoose.model("User", userSchema);
 module.exports = { User, isTaken };

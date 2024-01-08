@@ -26,6 +26,6 @@ const getAuthToken = (user) =>{
     const token  = user.generateAuthToken();
     return token
 }
-
+2
 
 module.exports = { createUser, getAuthToken }

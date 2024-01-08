@@ -7,7 +7,14 @@ const authController = {
         try{
             const {email, password} = req.body
             const user = await authServices.createUser(email,password)
-            const token = await authServices.getAuthToken();
+            const token = authServices.genAuthToken(user)
+
+            //Send Verification Email
+            res.cookie('x-access-token', token)
+            .status(httpStatus.CREATED).send({
+                user,
+                token
+            })
         }
         catch(error){
             res.status(httpStatus).send(error.message)
