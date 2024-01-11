@@ -21,5 +21,5 @@ const authController = {
         }
     }
 }
-//controller that calls service
+//controller that calls service.
 module.exports = authController;
