@@ -11,7 +11,6 @@ const authController = {
 
             //Send Verification Email
             res.cookie('x-access-token', token)
-            res.cookie('x-access-token', token)
             .status(httpStatus.CREATED).send({
                 user,
                 token
