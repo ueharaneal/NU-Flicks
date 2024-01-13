@@ -15,7 +15,7 @@ const port = process.env.PORT || 3001;
 mongoURI = process.env.MONGODB_URI
 console.log(mongoURI)
 
-mongoose.connect(mongoURI)
+mongoose.connect(uri)
 
 //mongoose.connect(mongoURI)
 
