@@ -15,7 +15,7 @@ const port = process.env.PORT || 3001;
 mongoURI = process.env.MONGODB_URI
 console.log(mongoURI)
 
-mongoose.connect(uri)
+mongoose.connect(mongoURI)
 
 //mongoose.connect(mongoURI)
 
@@ -29,7 +29,7 @@ app.use(mongoSanitize());
 
 
 //routes
-app.use('api',routes)
+app.use('/api',routes)
 
 
 app.listen(port, ()=> console.log(`Server is running on Port ${port}`))
