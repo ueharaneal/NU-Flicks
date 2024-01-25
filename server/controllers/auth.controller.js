@@ -29,8 +29,11 @@ const authController = {
 			)
 			//since sign in was successful we can send a token
 			const token = await authService.genAuthToken(user)
-			res.cookie()
-		} catch (error) {}
+			res.cookie("x-access-token", token).send(user, token)
+		} catch (error) {
+			console.log("error occued at controller")
+			res.status(httpStatus.BAD_REQUEST).send(error.message)
+		}
 	},
 }
 //controller that calls service.

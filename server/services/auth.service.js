@@ -37,7 +37,7 @@ const signInWithEmailAndPassword = async function (email, password) {
 		}
 		return user
 	} catch (error) {
-		res.status(httpStatus.BAD_REQUEST).send(error)
+		throw error
 	}
 }
 
