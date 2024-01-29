@@ -37,5 +37,4 @@ const authController = {
 	},
 }
 //controller that calls service.
-//added cookies
 module.exports = authController
