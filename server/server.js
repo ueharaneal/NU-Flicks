@@ -11,7 +11,9 @@ const mongoose = require("mongoose")
 const { xss } = require("express-xss-sanitizer")
 const mongoSanitize = require("express-mongo-sanitize")
 
-const port = process.env.PORT || 3001
+const { handleError } = require("./middleware/apiError")
+
+const port = process.env.PORT || 3002
 mongoURI = process.env.MONGODB_URI
 console.log(mongoURI)
 
@@ -28,5 +30,12 @@ app.use(mongoSanitize())
 
 //routes
 app.use("/api", routes)
+
+//make sure this is after the routes
+//error handling
+
+app.use((error, req, res, next) => {
+	handleError(error, res)
+})
 
 app.listen(port, () => console.log(`Server is running on Port ${port}`))

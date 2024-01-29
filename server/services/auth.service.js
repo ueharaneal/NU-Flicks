@@ -1,11 +1,14 @@
 const httpStatus = require("http-status")
 const { User } = require("../models/user")
 const userService = require("./user.service")
+const { ApiError } = require("../middleware/apiError")
 
 const createUser = async (email, password) => {
 	try {
 		if (await User.emailTaken(email)) {
-			throw new Error("Sorry email taken")
+			// we will no long be using throw new Error
+			// we will use our own error handling
+			throw new ApiError(httpStatus.BAD_REQUEST, "Sorry this email is taken")
 		}
 
 		const user = new User({
@@ -29,11 +32,14 @@ const signInWithEmailAndPassword = async function (email, password) {
 		//first check if an email exist
 		const user = await userService.findUserByEmail(email)
 		if (!user) {
-			throw new Error("Email does not exist")
+			throw new ApiError(
+				httpStatus.BAD_REQUEST,
+				"Sorry, This email does not exist"
+			)
 		}
 		//check to see if the passwords match
 		if (!(await user.comparePasswords(password))) {
-			throw new Error("Incorrect Password")
+			throw new ApiError(httpStatus.BAD_REQUEST, "Incorrect Password")
 		}
 		return user
 	} catch (error) {
