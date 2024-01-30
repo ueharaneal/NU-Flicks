@@ -11,7 +11,7 @@ const mongoose = require("mongoose")
 const { xss } = require("express-xss-sanitizer")
 const mongoSanitize = require("express-mongo-sanitize")
 
-const { handleError } = require("./middleware/apiError")
+const { handleError, convertToApiError } = require("./middleware/apiError")
 
 const port = process.env.PORT || 3002
 mongoURI = process.env.MONGODB_URI
@@ -33,7 +33,7 @@ app.use("/api", routes)
 
 //make sure this is after the routes
 //error handling
-
+app.use(convertToApiError)
 app.use((error, req, res, next) => {
 	handleError(error, res)
 })
