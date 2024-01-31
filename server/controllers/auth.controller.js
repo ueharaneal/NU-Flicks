@@ -18,24 +18,27 @@ const authController = {
 	},
 	async signin(req, res, next) {
 		try {
-			//we first need to verify the email exist
-			//check to see if the passwords match
-			//generate token and send response back to user
 			const { email, password } = req.body
 			const user = await authService.signInWithEmailAndPassword(
 				email,
 				password
 			)
-			//since sign in was successful we can send a token
 			const token = await authService.genAuthToken(user)
-			res.status(httpStatus.OK) // Ensure httpStatus.OK is a valid number, typically 200
-				.cookie("x-access-token", token)
-				.send({ user, token })
+
+			res.cookie("x-access-token", token).send({ user, token })
 		} catch (error) {
-			console.log("error occued at controller")
+			//res.status(httpStatus.BAD_REQUEST).send(error.message);
 			next(error)
 		}
 	},
+	async isauth(req, res, next) {
+		res.json(req.user)
+	},
+
+	async testrole(req, res, next) {
+		res.json({ ok: "it worked" })
+	},
 }
+
 //controller that calls service.
 module.exports = authController

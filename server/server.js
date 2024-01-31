@@ -17,7 +17,7 @@ const { jwtStrategy } = require("./middleware/passport")
 const { handleError, convertToApiError } = require("./middleware/apiError")
 
 const port = process.env.PORT || 3002
-mongoURI = process.env.MONGODB_URI
+const mongoURI = process.env.MONGODB_URI
 console.log(mongoURI)
 
 mongoose.connect(mongoURI)
@@ -25,7 +25,7 @@ mongoose.connect(mongoURI)
 //mongoose.connect(mongoURI)
 
 //Parsing
-app.use(bodyParser.json())
+app.use(express.json())
 
 //Santize
 app.use(xss())
