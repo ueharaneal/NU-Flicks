@@ -11,6 +11,9 @@ const mongoose = require("mongoose")
 const { xss } = require("express-xss-sanitizer")
 const mongoSanitize = require("express-mongo-sanitize")
 
+const passport = require("passport")
+const { jwtStrategy } = require("./middleware/passport")
+
 const { handleError, convertToApiError } = require("./middleware/apiError")
 
 const port = process.env.PORT || 3002
@@ -28,6 +31,9 @@ app.use(bodyParser.json())
 app.use(xss())
 app.use(mongoSanitize())
 
+//Passport
+app.use(passport.initialize())
+passport.use("jwt", jwtStrategy)
 //routes
 app.use("/api", routes)
 
