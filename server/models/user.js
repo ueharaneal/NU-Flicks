@@ -74,6 +74,7 @@ userSchema.methods.generateAuthToken = function () {
 	return token
 }
 
+
 userSchema.methods.comparePasswords = async function (candidatePassword) {
 	const user = this
 	const match = bcrypt.compare(candidatePassword, user.password)
@@ -81,3 +82,4 @@ userSchema.methods.comparePasswords = async function (candidatePassword) {
 }
 const User = mongoose.model("User", userSchema)
 module.exports = { User }
+
