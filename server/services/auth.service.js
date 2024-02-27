@@ -3,6 +3,7 @@ const httpStatus = require("http-status")
 const { User } = require("../models/user")
 const userService = require("./user.service")
 const { ApiError } = require("../middleware/apiError")
+//apiError
 
 const createUser = async (email, password) => {
 	try {
