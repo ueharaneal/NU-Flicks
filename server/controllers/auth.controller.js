@@ -36,9 +36,9 @@ const authController = {
 		res.json(req.user)
 	},
 
-	async testrole(req, res, next) {
-		res.json({ ok: "it worked" })
-	},
+	async testrole(req,res,next){
+		res.json("Ok", "Test role worked")
+	}
 }
 
 //controller that calls service.
