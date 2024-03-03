@@ -14,7 +14,7 @@ const routesIndex = [
         route: articlesRoutes
     },
     {
-        path:'/user',
+        path:'/users',
         route: userRoutes
     }
 ]

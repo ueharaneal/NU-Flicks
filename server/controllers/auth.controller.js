@@ -36,9 +36,9 @@ const authController = {
     res.json(req.user);
   },
 
-  async testrole(req, res, next) {
-    res.json(req.user);
-  },
+//   async testrole(req, res, next) {
+//     res.json(req.user);
+//   },
 };
 
 //controller that calls service. 

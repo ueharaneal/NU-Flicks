@@ -10,7 +10,15 @@ const verify = (req, res, resolve, reject, rights) => async (err, user) => {
       new ApiError(httpStatus.UNAUTHORIZED, "Sorry unauthorized (API)")
     );
   }
-  req.user = user;
+  req.user = {
+    _id: user._id,
+    email:user.email,
+    role:user.role,
+    firstname:user.firstname,
+    lastname:user.lastname,
+    age:user.age,
+    verified: user.verified
+  };
   //we will determine the role of the user here
   if(rights.length) {
     console.log("reached the if statement")

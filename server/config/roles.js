@@ -9,12 +9,15 @@ const allRights = {
 };
 let grantsObject = {
   admin: {
-    test: allRights,
+    //test: allRights,
+    profile: allRights,
   },
   user: {
-    test: {
-      "create:any": ["*"],
-    },
+    //test: {"create:any": ["*"],},
+	profile:{
+		'read:own':['*', '!password','!_id'],
+		'update:own':['*','!password', '!_id']
+	}
   },
 };
 
