@@ -21,7 +21,6 @@ const verify = (req, res, resolve, reject, rights) => async (err, user) => {
   };
   //we will determine the role of the user here
   if(rights.length) {
-    console.log("reached the if statement")
     const action = rights[0]; //create Any, read any ...
     const resource = rights[1]; // profiles,articles...
     const permission = roles.can(req.user.role)[action](resource);
