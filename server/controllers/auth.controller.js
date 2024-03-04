@@ -1,4 +1,4 @@
-const { authService } = require("../services/index");
+const { authService, emailService } = require("../services/index");
 const httpStatus = require("http-status");
 
 const authController = {
@@ -9,6 +9,7 @@ const authController = {
       const token = authService.genAuthToken(user);
 
       //Send Verification Email
+      await emailService.registerEmail(email, user);
       res
         .status(httpStatus.OK)
         .cookie("x-access-token", token)
@@ -36,10 +37,10 @@ const authController = {
     res.json(req.user);
   },
 
-//   async testrole(req, res, next) {
-//     res.json(req.user);
-//   },
+  //   async testrole(req, res, next) {
+  //     res.json(req.user);
+  //   },
 };
 
-//controller that calls service. 
+//controller that calls service.
 module.exports = authController;
