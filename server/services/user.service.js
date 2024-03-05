@@ -1,5 +1,7 @@
 const { User } = require("../models/user");
 const httpStatus = require("http-status");
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 //find user email for login
 const findUserByEmail = async (email) => {
@@ -58,9 +60,14 @@ const updateUserEmail = async (req) => {
   }
 };
 
+const validateToken = (token) => {
+  return jwt.verify(token, process.env.DB_SECRET );
+};
+
 module.exports = {
   findUserByEmail,
   findUserById,
   updateUserProfile,
   updateUserEmail,
+  validateToken,
 };
