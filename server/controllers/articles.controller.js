@@ -4,7 +4,8 @@ const { articlesService } = require("../services");
 const articlesController = {
   async createCategories(req, res, next) {
     try {
-      const category = articlesService.addCategory(req.body);
+      const category = await articlesService.addCategory(req.body);
+      res.json(category);
     } catch (error) {
       next(error);
     }
