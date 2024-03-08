@@ -2,6 +2,14 @@ const { Category } = require("../models/category");
 const httpStatus = require("http-status");
 const ApiError = require("../middleware/apiError");
 
+const addArticle = async(body)=>{
+  try{
+    
+  }catch(error){
+    throw error; 
+  }
+}
+
 const addCategory = async (body) => {
   try {
     //validation
@@ -26,4 +34,5 @@ const findAllCategories = async () => {
 module.exports = {
   addCategory,
   findAllCategories,
+  addArticle, 
 };

@@ -12,6 +12,7 @@ let grantsObject = {
     //test: allRights,
     profile: allRights,
     categories: allRights,
+    articles: allRights, 
   },
   user: {
     //test: {"create:any": ["*"],},
@@ -19,6 +20,9 @@ let grantsObject = {
       "read:own": ["*", "!password", "!_id"],
       "update:own": ["*", "!password", "!_id"],
     },
+    articles: {
+      "read:any" : ['*']
+    }
   },
 };
 
