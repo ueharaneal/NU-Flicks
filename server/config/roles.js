@@ -1,4 +1,3 @@
-//this a manifest for all the roles
 const AccessControl = require("accesscontrol");
 
 const allRights = {
@@ -7,22 +6,23 @@ const allRights = {
   "update:any": ["*"],
   "delete:any": ["*"],
 };
+
 let grantsObject = {
   admin: {
-    //test: allRights,
+    // test:allRights,
     profile: allRights,
     categories: allRights,
-    articles: allRights, 
+    articles: allRights,
   },
   user: {
-    //test: {"create:any": ["*"],},
+    // test:{ 'read:any':['*'] }
     profile: {
       "read:own": ["*", "!password", "!_id"],
       "update:own": ["*", "!password", "!_id"],
     },
     articles: {
-      "read:any" : ['*']
-    }
+      "read:any": ["*"],
+    },
   },
 };
 
