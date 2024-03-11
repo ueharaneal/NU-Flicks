@@ -22,8 +22,6 @@ const mongoURI = process.env.MONGODB_URI;
 
 mongoose.connect(mongoURI);
 
-//mongoose.connect(mongoURI)
-
 //Parsing
 app.use(express.json());
 
