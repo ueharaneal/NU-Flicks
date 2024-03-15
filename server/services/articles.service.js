@@ -24,7 +24,7 @@ const getArticleById = async (_id, user) => {
         "Sorry bad request, You are not authorized"
       );
     }
-    const article = await Article.findById(_id);
+    const article = await Article.findById(_id).populate('category')
     if (!article) {
       throw new ApiError(httpStatus.NOT_FOUND, "Could not find article by ID");
     }
