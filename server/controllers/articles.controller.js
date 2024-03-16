@@ -20,6 +20,29 @@ const articlesController = {
       next(error);
     }
   },
+
+  async updateArticleById(req,res,next){
+    try{
+      const _id = req.params.id;
+      const article = await articlesService.updateArticleById(_id, req.body)
+      res.json(article)
+
+    }catch(error){
+      next(error)
+    }
+  },
+
+  async deleteArticleById(req,res,next){
+    try{
+      const _id = req.params.id;
+      const deletedArticle = await articlesService.deleteArticleById(_id)
+      res.send(`Article with the title ${deletedArticle.title} was deleted`)
+      
+    }catch(error){
+      next(error)
+    }
+
+  },
   async createCategories(req, res, next) {
     try {
       const category = await articlesService.addCategory(req.body);

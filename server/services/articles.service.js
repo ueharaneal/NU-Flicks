@@ -24,11 +24,37 @@ const getArticleById = async (_id, user) => {
         "Sorry bad request, You are not authorized"
       );
     }
-    const article = await Article.findById(_id).populate('category')
+    const article = await Article.findById(_id).populate("category");
     if (!article) {
       throw new ApiError(httpStatus.NOT_FOUND, "Could not find article by ID");
     }
     return article;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateArticleById = async (_id, body) => {
+  try {
+    const article = await Article.findOneAndUpdate(
+      { _id },
+      { $set: body },
+      { new: true }
+    );
+    if (!article) throw new ApiError(httpStatus.NOT_FOUND, "Article not found");
+    return article;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteArticleById = async (_id) => {
+  try {
+    const article = await Article.findByIdAndDelete(_id)
+    if(!article){
+      throw new ApiError(httpStatus.NOT_FOUND, "Article could not be found")
+    }
+    return article 
   } catch (error) {
     throw error;
   }
@@ -60,4 +86,6 @@ module.exports = {
   findAllCategories,
   addArticle,
   getArticleById,
+  updateArticleById,
+  deleteArticleById,
 };
