@@ -15,7 +15,10 @@ router
   .route("/article/:id")
   .get(auth("readAny", "articles"), articlesController.getArticleById)
   .patch(auth("updateAny", "articles"), articlesController.updateArticleById)
-  .delete(auth("deleteAny", "articles"), articlesController.deleteArticleById)
+  .delete(auth("deleteAny", "articles"), articlesController.deleteArticleById);
+
+//get user's article ID
+router.route("/users/article/:id").get(articlesController.getUsersArticlesById)
 //categories
 router
   .route("/categories")

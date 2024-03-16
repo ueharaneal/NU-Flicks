@@ -31,7 +31,7 @@ const articleSchema = mongoose.Schema({
     type: [String],
     required: true,
     validate: {
-        validator: function (array) {
+      validator: function (array) {
         return array.length >= 2;
       },
       message: "You must add atleast three actors",
@@ -40,19 +40,18 @@ const articleSchema = mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ['draft', 'public'],
-    default: 'draft',
-    index: true, 
+    enum: ["draft", "public"],
+    default: "draft",
+    index: true,
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
-    required: true
+    ref: "Category",
+    required: true,
   },
   date: {
-    type: Date, 
-    default: Date.now
-
+    type: Date,
+    default: Date.now,
   },
 });
 

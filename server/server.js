@@ -37,9 +37,9 @@ app.use("/api", routes);
 
 //make sure this is after the routes
 //error handling
-app.use(convertToApiError);
-app.use((error, req, res, next) => {
-  handleError(error, res);
+app.use(convertToApiError)
+app.use((err,req,res,next)=>{
+    handleError(err,res)
 });
 
 app.listen(port, () => console.log(`Server is running on Port ${port}`));
