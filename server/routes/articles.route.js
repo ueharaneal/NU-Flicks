@@ -18,7 +18,12 @@ router
   .delete(auth("deleteAny", "articles"), articlesController.deleteArticleById);
 
 //get user's article ID
-router.route("/users/article/:id").get(articlesController.getUsersArticlesById)
+router.route("/users/article/:id").get(articlesController.getUsersArticlesById);
+
+//get all articles
+router.route("/all")
+.get(articlesController.getAllArticles)
+
 //categories
 router
   .route("/categories")
