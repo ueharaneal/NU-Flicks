@@ -42,21 +42,22 @@ const articlesController = {
   },
   async getUsersArticlesById(req, res, next) {
     try {
-      console.log('reached controller')
+      console.log("reached controller");
       const _id = req.params.id;
       const article = await articlesService.getUsersArticleById(_id);
       res.json(article);
     } catch (error) {
-      next (error);
+      next(error);
     }
   },
 
-  async getAllArticles(req,res,next){
-    try{
-      const articles = await articlesService.allArticles(req.body);
-      res.json(articles)
-    }catch(error){
-      next (error) 
+  async getAllArticles(req, res, next) {
+    try {
+      console.log('get all articles controller')
+      const articles = await articlesService.allArticles(req);
+      res.json(articles);
+    } catch (error) {
+      next(error);
     }
   },
 
