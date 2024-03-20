@@ -21,8 +21,10 @@ router
 router.route("/users/article/:id").get(articlesController.getUsersArticlesById);
 
 //get all articles
-router.route("/all")
-.get(articlesController.getAllArticles)
+router
+  .route("/all")
+  .get(articlesController.getAllArticles)
+  .post(articlesController.getMoreArticles);
 
 //categories
 router
