@@ -3,7 +3,8 @@ import React from 'react'
 function App() {
   return (
     <div className='text-red-500'>
-      <div>Welcome to Nu Flicks</div>
+      <p className='harmattan-regular'>Welcome to Nu Flicks yyyy</p>
+      <p className=''>Welcome to Nu Flicks yyyy</p>
       
     </div>
   )
