@@ -11,6 +11,7 @@
     "express-xss-sanitizer": "^1.1.6",
     "http-status": "^1.7.3",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.363.0",
     "mailgen": "^2.0.28",
     "mongoose": "^7.6.3",
     "mongoose-aggregate-paginate-v2": "^1.0.7",
