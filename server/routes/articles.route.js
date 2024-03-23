@@ -26,6 +26,8 @@ router
   .get(articlesController.getAllArticles)
   .post(articlesController.getMoreArticles);
 
+//article pagination 
+router.post('/admin/paginate', auth('readAny', 'articles'),articlesController.adminPaginate)
 //categories
 router
   .route("/categories")
