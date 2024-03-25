@@ -32,8 +32,11 @@ const Header = () => {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              Item Two
+            Search Movies
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="grid w-[200px] gap-3 p-4 md:w-[400px] md:grid-cols-2 lg:w-[600px] ">
+              Account
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <NavigationMenuLink>Link2</NavigationMenuLink>
