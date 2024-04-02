@@ -12,17 +12,17 @@ import {
 
 import HeaderDropDown from "./HeaderDropDown";
 import { ModeToggle } from "../theme/mode-toggle";
-
+//LOGGED OUT HEADER
 const Header = () => {
   return (
-    <div className="fixed-top flex flex-row px-4 m-4 justify-between border-x-4 border-foreground">
+    <div className="fixed-top flex flex-row px-5 m-4 justify-between border-x-4 border-foreground">
       <Link to="/">
         <h1 className="text-primary p-2 rounded-lg text-heavy text-4xl hover:bg-muted">
           NU FL<span className="text-foreground">I</span>CKS
         </h1>
       </Link>
       <NavigationMenu orientation="vertical" className="">
-        <NavigationMenuList>
+        <NavigationMenuList className="gap-x-3">
           <NavigationMenuItem>
             <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
             <NavigationMenuContent>
