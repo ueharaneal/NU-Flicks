@@ -11,7 +11,7 @@ interface UserData {
 }
 
 
-interface UserState {
+export interface UserState {
   loading: boolean;
   data: UserData;
   auth: string | null | boolean;
