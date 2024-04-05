@@ -10,15 +10,13 @@ interface UserData {
   verified: boolean | null;
 }
 
-
 export interface UserState {
   loading: boolean;
   data: UserData;
-  auth: string | null | boolean;
+  auth: boolean | null | string;
 }
 
-
-let DEFAULT_USER_STATE: UserState= {
+let DEFAULT_USER_STATE: UserState = {
   loading: false,
   data: {
     id: null,
@@ -31,6 +29,12 @@ let DEFAULT_USER_STATE: UserState= {
   },
   auth: null,
 };
+
+// export const userSlice = createSlice({
+//   name: "users",
+//   initialState: DEFAULT_USER_STATE,
+//   reducers: {},
+// });'
 
 export const userSlice = createSlice({
   name: "users",

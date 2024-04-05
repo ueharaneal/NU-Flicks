@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./components/theme/theme-provider";
 import Home from "./pages/Home";
 import MainLayout from "./components/hoc/MainLayout";
+import Auth from "./components/auth";
 
 import Header from "./components/navigation/Header";
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Header />
         <MainLayout>
           <Routes>
+            <Route path="/auth" element={<Auth/>}></Route>
             <Route path="/" element={<Home />} />
             <Route />
           </Routes>
