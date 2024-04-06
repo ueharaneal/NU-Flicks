@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-interface UserData {
+import { registerUser, signInUser } from "../actions/users";
+export interface UserData {
   id: string | null;
   email: string | null;
   firstname: string | null;
@@ -40,6 +40,29 @@ export const userSlice = createSlice({
   name: "users",
   initialState: DEFAULT_USER_STATE,
   reducers: {},
+  extraReducers: (builder) => {
+    builder
+      //register
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        (state.loading = false),
+          (state.data = action.payload.data),
+          (state.auth = action.payload.auth);
+      })
+      .addCase(registerUser.rejected, (state) => {})
+      //signin user
+      .addCase(signInUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(signInUser.fulfilled, (state, action) => {
+        (state.data = action.payload.data),
+          (state.loading = false),
+          (state.auth = true);
+      })
+      .addCase(signInUser.rejected, (state) => {});
+  },
 });
 
 //actions..

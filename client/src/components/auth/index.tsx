@@ -5,9 +5,9 @@ import { RootState, AppDispatch } from "@/store";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { registerUser, signInUser } from "@/store/actions/users";
 //ui
-import {Loader} from '@components/common/utils'
+import { Loader } from "@components/common/utils";
 import { useToast } from "../ui/use-toast";
 
 import {
@@ -22,8 +22,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const schema = z.object({
+  firstname: z.string(),
+  lastname: z.string(),
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z.string().min(4),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -36,7 +38,6 @@ function Auth() {
   const users = useSelector((state: RootState) => state.users);
   const notifications = useSelector((state: RootState) => state.notifications);
 
-
   const {
     register,
     handleSubmit,
@@ -45,10 +46,14 @@ function Auth() {
   } = useForm<FormFields>({
     resolver: zodResolver(schema),
   });
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<FormFields> = async (values) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
+      if(!registered){
+       dispatch(registerUser(values))
+      }else{
+        dispatch(signInUser(values))
+      }
+      console.log(values);
     } catch (error) {
       setError("root", {
         message: "This email is already taken ",
@@ -56,74 +61,95 @@ function Auth() {
     }
   };
 
-    //use effect for toast 
-    const { toast } = useToast()
-    useEffect(() => {
-      if (errors.email || errors.password) {
-        toast({
-          title: "Error",
-          description: (errors.email?.message || "") + " " + (errors.password?.message || ""),
-          variant: "destructive",
-        });
-      }
-    }, [errors.email,errors.password, toast]);
+  //use effect for toast
+  const { toast } = useToast();
+  useEffect(() => {
+    if (errors.email || errors.password) {
+      toast({
+        title: "Error",
+        description:
+          (errors.email?.message || "") +
+          " " +
+          (errors.password?.message || ""),
+        variant: "destructive",
+      });
+    }
+  }, [errors.email, errors.password]);
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <Card className="mx-auth max-w-lg">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Login</CardTitle>
-          <CardDescription>
-            Enter your email and password to login to your account
-          </CardDescription>
-        </CardHeader>
-
-        {users.loading ? (
-          <Loader />
-        ) : (
-          <CardContent className="">
-            {errors.root && 
-              <div className="text-red-500">{errors.root.message}</div>
-            }
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="py-3">
-                <Label>Email:</Label>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Card className="mx-auto max-w-lg">
+          <CardHeader>
+            <CardTitle className="text-xl">{!registered ? "Sign Up" : "Sign In"}</CardTitle>
+            <CardDescription>
+              Enter your information to create an account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
+              {!registered && <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="first-name">First name</Label>
+                  <Input
+                    id="first-name"
+                    placeholder="First name"
+                    required
+                    {...register("firstname")}
+                  /> 
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="last-name">Last name</Label>
+                  <Input
+                    id="last-name"
+                    placeholder="Last name"
+                    required
+                    {...register("lastname")}
+                  />
+                </div>
+              </div>}
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
                 <Input
-                  placeholder="Email"
-                  type="text"
-                  {...register("email")}
-                ></Input>
-                {errors.email && (
-                  <div className="text-red-500">{errors.email.message}</div>
-                )}
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                  {...register("email", {
+                    required: true,
+                  })}
+                />
+                {errors.email && <div className="text-red-500">{errors.email.message}</div>}
               </div>
-              <div className="py-3">
-                <Label>Password:</Label>
+              <div className="grid gap-2">
+                <Label htmlFor="password">Password</Label>
                 <Input
-                  placeholder="Password"
+                  id="password"
                   type="password"
                   {...register("password")}
-                ></Input>
-                {errors.password && (
-                  <div className="text-red-500">{errors.password.message}</div>
-                )}
+                />
+                {errors.password && <div className="text-red-500">{errors.password.message}</div> }
               </div>
-              <Button disabled={isSubmitting} type="submit" className="w-full">
-                {isSubmitting ? (
-                  <Loader />
-                ) : registered ? (
-                  "Login"
-                ) : (
-                  "Register"
-                )}
+              <Button type="submit" disabled={isSubmitting} className="w-full">
+                {isSubmitting ? <Loader /> : !registered ? "Sign up" : "Login"}
               </Button>
-            </form>
+              <Button
+                variant="outline"
+                className="w-full"
+                disabled={isSubmitting}
+              >
+                 {!registered ? "Sign up with Google" : "Sign in with Google"}
+              </Button>
+            </div>
           </CardContent>
-        )}
-      </Card>
-      <Button className="mt-4 " variant="outline" onClick={() => setRegistered(!registered)}>
-       {!registered ? "Already have an an account?" : "Register"}
+        </Card>
+      </form>
+      <Button
+        variant="link"
+        className="text-primary"
+        onClick={() => setRegistered(!registered)}
+      >
+        {!registered ? "Already have an account?" : "Create a new account"}
       </Button>
     </div>
   );
