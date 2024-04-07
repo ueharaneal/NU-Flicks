@@ -1,19 +1,12 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@ui/navigation-menu";
-
-import HeaderDropDown from "./HeaderDropDown";
-import { ModeToggle } from "../theme/mode-toggle";
+import AuthenticatedMenu from "./AuthenticatedMenu";
+import { RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+  
 //LOGGED OUT HEADER
 const Header = () => {
+  const users = useSelector((state:RootState)=>state.users)
+  const dispatch = useDispatch()
   return (
     <div className="fixed-top flex flex-row px-5 m-4 justify-between border-x-4 border-foreground">
       <Link to="/">
@@ -21,31 +14,7 @@ const Header = () => {
           NU FL<span className="text-foreground">I</span>CKS
         </h1>
       </Link>
-      <NavigationMenu orientation="vertical" className="">
-        <NavigationMenuList className="gap-x-3">
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <NavigationMenuLink className="navigationMenuTriggerStyle bg-primary">
-                Link
-              </NavigationMenuLink>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>Search Movies</NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuContent>
-              <NavigationMenuLink>Link2</NavigationMenuLink>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <HeaderDropDown/>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <ModeToggle />
-          </NavigationMenuItem>
-        </NavigationMenuList>
-        <NavigationMenuViewport />
-      </NavigationMenu>
+      <AuthenticatedMenu users={users}/>
     </div>
   );
 };

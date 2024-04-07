@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser, signInUser } from "../actions/users";
+import { registerUser, signInUser, isAuth, signOut } from "../actions/users";
 export interface UserData {
   id: string | null;
   email: string | null;
@@ -61,7 +61,22 @@ export const userSlice = createSlice({
           (state.loading = false),
           (state.auth = true);
       })
-      .addCase(signInUser.rejected, (state) => {});
+      .addCase(signInUser.rejected, (state) => {state.loading = false})
+      //isAuth? 
+      .addCase(isAuth.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(isAuth.fulfilled, (state, action) => {
+        (state.data = {...state.data, ...action.payload.data}),
+          (state.loading = false),
+          (state.auth = action.payload.auth);
+      })
+      .addCase(isAuth.rejected, (state) => {state.loading = false})
+      //signout 
+      .addCase(signOut.fulfilled, (state)=>{
+        state.data = DEFAULT_USER_STATE.data,
+        state.auth = false
+      })
   },
 });
 
