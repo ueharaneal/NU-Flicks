@@ -6,6 +6,9 @@ import Register from "./Register.tsx";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store";
 
+type Props = {
+  onClick: () => void; // Function that doesn't return anything
+};
 function index() {
     const users = useSelector((state: RootState) => state.users);
     const [isRegistered, setIsRegistered] = useState<boolean>(false)

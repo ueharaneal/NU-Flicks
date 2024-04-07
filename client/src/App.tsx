@@ -19,10 +19,12 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: RootState) => state.users);
-
+  
   useEffect(() => {
-    dispatch(isAuth());
+    dispatch(isAuth() as any);
   }, []);
+
+
   useEffect(() => {
     if (users.auth !== null) {
       setLoading(false);

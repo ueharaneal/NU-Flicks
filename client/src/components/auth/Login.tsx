@@ -21,14 +21,14 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { LogIn } from "lucide-react";
+
 
 const baseSchema = z.object({
   email: zodEmail(),
   password: zodPassword(),
 });
 
-function Login({ onIsRegisterChange }) {
+function Login({ onIsRegisterChange}) {
   //reducx
   const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: RootState) => state.users);
