@@ -19,17 +19,15 @@ import HeaderDropDown from "./HeaderDropDown";
 import { ModeToggle } from "../theme/mode-toggle";
 import { signOut } from "@/store/actions/users";
 import { Button } from "../ui/button";
-function AuthenticatedMenu({ users } : {users:UserState}) {
-    const dispatch = useDispatch<AppDispatch>()
-    let navigate = useNavigate()
-    const signUserOut: VoidFunction = ()=>{
-     dispatch(signOut())
-     navigate('/')
-    }
-        
-        
+function AuthenticatedMenu({ users }: { users: UserState }) {
+  const dispatch = useDispatch<AppDispatch>();
+  let navigate = useNavigate();
+  const signUserOut: VoidFunction = () => {
+    dispatch(signOut() as any).then(() => navigate("/"));
+  };
+
   return (
-    <div>
+    <div className="">
       <NavigationMenu orientation="vertical" className="">
         <NavigationMenuList className="gap-x-3">
           <NavigationMenuItem>
@@ -41,7 +39,10 @@ function AuthenticatedMenu({ users } : {users:UserState}) {
             </NavigationMenuContent>
           </NavigationMenuItem>
           {users.auth ? (
-            <NavigationMenuItem> <Button onClick={()=>signUserOut()}>Logout</Button></NavigationMenuItem>
+            <NavigationMenuItem>
+              {" "}
+              <Button onClick={() => signUserOut()}>Logout</Button>
+            </NavigationMenuItem>
           ) : (
             <NavigationMenuItem>
               <Link to="/auth">Log In</Link>

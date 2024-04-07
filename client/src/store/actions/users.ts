@@ -10,8 +10,8 @@ type ThunkAction = AsyncThunkAction<{ data: any; auth: boolean }, void, {}>;
 interface RegisterUserArgs {
   email: string;
   password: string;
-  firstname: string;
-  lastname: string;
+  firstname: string | null;
+  lastname: string | null;
 }
 
 interface SignInArgs {
