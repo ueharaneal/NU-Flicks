@@ -11,8 +11,10 @@ import { LargeLoader } from "./components/common/utils";
 import Home from "./pages/Home";
 import Auth from "./components/auth";
 import Header from "./components/navigation/Header";
-import Dashboard from "./pages/Dashboard";
-import { boolean } from "zod";
+
+import DashboardMain from "./components/dashboard/DashboardMain";
+import Dashboard from "./components/dashboard";
+import AuthGuard from "./components/hoc/AuthGuard";
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch<AppDispatch>();
@@ -22,24 +24,32 @@ function App() {
     dispatch(isAuth());
   }, []);
   useEffect(() => {
-    if(users.auth !== null){
-      setLoading(false)
+    if (users.auth !== null) {
+      setLoading(false);
     }
-
   }, [users]);
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
         {loading ? (
-          <LargeLoader/>
+          <LargeLoader />
         ) : (
           <>
             <Header />
             <MainLayout>
               <Routes>
+                <Route
+                  path="/dashboard"
+                  element={
+                    <AuthGuard>
+                      <Dashboard />
+                    </AuthGuard>
+                  }
+                >
+                  <Route index element={<DashboardMain />} />
+                </Route>
                 <Route path="/auth" element={<Auth />}></Route>
                 <Route path="/" element={<Home />} />
-                <Route  path="/dashboard" element={<Dashboard isAuthenticated={users.auth}/>}/>
               </Routes>
             </MainLayout>
           </>
