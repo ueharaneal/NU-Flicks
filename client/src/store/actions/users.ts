@@ -57,8 +57,10 @@ export const signInUser = createAsyncThunk<
     //show a message
     console.log("itworked");
     console.log(request);
+    dispatch(successGlobal("Welcome!"))
     return { data: request.data.user, auth: true };
   } catch (error) {
+    dispatch(errorGlobal(error.repsonse.data.message))
     console.error(error);
     throw error;
   }
