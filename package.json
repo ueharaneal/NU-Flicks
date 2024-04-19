@@ -19,6 +19,7 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "react-hook-form": "^7.51.2",
+    "react-toastify": "^10.0.5",
     "validator": "^13.11.0"
   },
   "name": "memory-game",
