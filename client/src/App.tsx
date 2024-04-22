@@ -44,11 +44,12 @@ function App() {
                   path="/dashboard"
                   element={
                     <AuthGuard>
-                      <Dashboard />
+                      <Dashboard/>
                     </AuthGuard>
                   }
                 >
                   <Route index element={<DashboardMain />} />
+                  <Route path="/profile" element={<DashboardMain  />} />
                 </Route>
                 <Route path="/auth" element={<Auth />}></Route>
                 <Route path="/" element={<Home />} />

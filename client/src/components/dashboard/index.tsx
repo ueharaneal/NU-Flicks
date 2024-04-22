@@ -2,7 +2,10 @@
 import { Outlet } from 'react-router-dom'
 function Dashboard(){
     return(
-        <Outlet/>
+        <div className="flex flex-row">
+            <DashboardSideBar/>
+            <Outlet/>
+        </div>
     )
 }
 
