@@ -1,20 +1,39 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useLocation, Navigate } from 'react-router-dom'
-import { RootState } from '@/store'
+import React,{ useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
+interface AuthGuardProps extends RouteComponentProps{
 
-interface AuthGuardProps{
-    children: React.ReactNode
 }
 
-function AuthGuard(props:AuthGuardProps) {
-    const users = useSelector((state:RootState)=>state.users)
-    let location = useLocation()
-  return (
-    <div>
-      
-    </div>
-  )
-}
+export default function AuthGuard(ComposedComponent: React.ReactNode,roleCheck=false){
+    const AuthenticationCheck = (props) => {
+        const [isAuth, setIsAuth ] = useState(false);
+        const users = useSelector( state => state.users )
 
-export default AuthGuard
+
+        useEffect(()=>{
+            if(!users.auth){
+                props.history.push('/')
+            } else {
+                if(roleCheck && users.data.role === 'user'){
+                    props.history.push('/dashboard')
+                } else{
+                    setIsAuth(true)
+                }
+            }
+        },[props,users])
+
+
+        if(!isAuth){
+            return(
+                <div className="">
+                    loading
+                </div>
+            )
+        } else{
+            return(
+                <ComposedComponent {...props}/>
+            )
+        }
+    }
+    return AuthenticationCheck;
