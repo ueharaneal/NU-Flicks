@@ -29,7 +29,10 @@ const baseSchema = z.object({
   lastname: zodString({ minLen: 1 }),
 });
 
-function Register({ onIsRegisterChange }) {
+type onIsRegisterChangeProps = () => void 
+
+
+function Register({ onIsRegisterChange }: { onIsRegisterChange : onIsRegisterChangeProps }) {
   //reducx
   const dispatch = useDispatch<AppDispatch>();
 

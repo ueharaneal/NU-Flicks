@@ -19,11 +19,10 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: RootState) => state.users);
-  
+
   useEffect(() => {
     dispatch(isAuth() as any);
   }, []);
-
 
   useEffect(() => {
     if (users.auth !== null) {
@@ -40,16 +39,11 @@ function App() {
             <Header />
             <MainLayout>
               <Routes>
-                <Route
-                  path="/dashboard"
-                  element={
-                    <AuthGuard>
-                      <Dashboard/>
-                    </AuthGuard>
-                  }
-                >
-                  <Route index element={<DashboardMain />} />
-                  <Route path="/profile" element={<DashboardMain  />} />
+                <Route path="" element={<AuthGuard />}>
+                  <Route path="/dashboard" element={<Dashboard />}>
+                    <Route index element={<DashboardMain />} />
+                    <Route path="/profile" element={<DashboardMain />} />
+                  </Route>
                 </Route>
                 <Route path="/auth" element={<Auth />}></Route>
                 <Route path="/" element={<Home />} />
