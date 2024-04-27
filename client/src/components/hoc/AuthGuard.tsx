@@ -37,3 +37,4 @@ export default function AuthGuard(ComposedComponent: React.ReactNode,roleCheck=f
         }
     }
     return AuthenticationCheck;
+}
