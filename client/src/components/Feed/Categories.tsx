@@ -2,10 +2,16 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import { getTokenCookie } from '@/utils/tools';
 import CategoriesCard from './CategoriesCard';
+interface Categories {
+  name: string,
+  imageUrl: string, 
+  date: Date,
+  id: string
+}
 function Categories() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Categories[]|null>(null);
     useEffect(()=>{
-         axios.get("/api/articles/categories",{
+          axios.get<Categories[]>("/api/articles/categories",{
             headers:{
                 Authorization: getTokenCookie()
             }
@@ -18,13 +24,13 @@ function Categories() {
 
     },[])
     console.log(data)
-    const content = data.map((article)=>{
-        return(<CategoriesCard key={article.id} name = {article.name}></CategoriesCard>)
+    const content = data?.map((article)=>{
+        return(<CategoriesCard key={article.id} name = {article.name} imageUrl={article.imageUrl}></CategoriesCard>)
     })
   return (
-    <div>
-      <h1 className='text-xl font-bold'>Browse by Categories</h1>
-        <div>{content}</div>
+    <div className=''>
+      <h1 className='text-2xl font-bold '>Browse by Categories</h1>
+        <div className='mt-[-70px]'>{content}</div>
     </div>
   )
 }

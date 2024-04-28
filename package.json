@@ -3,6 +3,7 @@
     "accesscontrol": "^2.2.1",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "clsx": "^2.1.1",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -10,6 +11,7 @@
     "express-mongo-sanitize": "^2.2.0",
     "express-validator": "^7.0.1",
     "express-xss-sanitizer": "^1.1.6",
+    "framer-motion": "^11.1.7",
     "http-status": "^1.7.3",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.363.0",
@@ -21,6 +23,7 @@
     "passport-jwt": "^4.0.1",
     "react-hook-form": "^7.51.2",
     "react-toastify": "^10.0.5",
+    "tailwind-merge": "^2.3.0",
     "validator": "^13.11.0"
   },
   "name": "memory-game",

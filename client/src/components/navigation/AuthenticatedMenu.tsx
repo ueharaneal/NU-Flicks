@@ -29,7 +29,7 @@ function AuthenticatedMenu({ users }: { users: UserState }) {
   return (
     <div>
       <NavigationMenu orientation="vertical" className="">
-        <NavigationMenuList className="gap-x-3">
+        <NavigationMenuList className="gap-x-3 mt-2">
           <NavigationMenuItem>
            <Button variant="ghost"className="py-4"> <Link to="/auth">Dashboard</Link> </Button>
           </NavigationMenuItem>
@@ -40,7 +40,8 @@ function AuthenticatedMenu({ users }: { users: UserState }) {
             </NavigationMenuItem>
           ) : (
             <NavigationMenuItem>
-              <Link to="/auth">Log In</Link>
+              
+              <Link to="/auth"><Button>Log in</Button></Link>
             </NavigationMenuItem>
           )}
           <NavigationMenuItem>
