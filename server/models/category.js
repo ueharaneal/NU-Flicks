@@ -13,7 +13,11 @@ const categoriesSchema = mongoose.Schema({
     date: {
         type: Date, 
         default: Date.now
-    }
+    },
+    imageUrl: {
+        type: String,  
+        trim: true    
+    },
 })
 
 const Category = mongoose.model('Category', categoriesSchema)
