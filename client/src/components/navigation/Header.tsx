@@ -37,10 +37,10 @@ const Header = () => {
   },[notifications])
 
   return (
-    <div className="fixed-top flex flex-row px-5 m-4 justify-between border-x-4 border-foreground">
+    <div className="fixed-top flex flex-row px-10 py-3 w-full justify-between border-b-4 border-foreground">
       <Link to="/">
         <h1 className="text-primary p-2 rounded-lg text-heavy text-4xl hover:bg-muted">
-          NU FL<span className="text-foreground">I</span>CKS
+          NU FL<span className="text-foreground">i</span>CKS
         </h1>
       </Link>
       <AuthenticatedMenu users={users}/>

@@ -27,21 +27,16 @@ function AuthenticatedMenu({ users }: { users: UserState }) {
   };
 
   return (
-    <div className="">
+    <div>
       <NavigationMenu orientation="vertical" className="">
         <NavigationMenuList className="gap-x-3">
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <NavigationMenuLink className="navigationMenuTriggerStyle bg-primary">
-                Link
-              </NavigationMenuLink>
-            </NavigationMenuContent>
+           <Button variant="ghost"className="py-4"> <Link to="/auth">Dashboard</Link> </Button>
           </NavigationMenuItem>
           {users.auth ? (
             <NavigationMenuItem>
               {" "}
-              <Button onClick={() => signUserOut()}>Logout</Button>
+              <Button  onClick={() => signUserOut()}>Logout</Button>
             </NavigationMenuItem>
           ) : (
             <NavigationMenuItem>

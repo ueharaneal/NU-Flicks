@@ -15,6 +15,7 @@ import Header from "./components/navigation/Header";
 import DashboardMain from "./components/dashboard/DashboardMain";
 import Dashboard from "./pages/Dashboard";
 import AuthGuard from "./components/hoc/AuthGuard";
+import CreateArticle from "./components/dashboard/CreateArticle";
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch<AppDispatch>();
@@ -39,13 +40,15 @@ function App() {
             <Header />
             <MainLayout>
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="" element={<AuthGuard />}>
                   <Route path="/dashboard" element={<Dashboard />}>
+                    <Route path="home" element={<DashboardMain/>}/>
                     <Route path="profile" element={<DashboardMain />} />
+                    <Route path="create" element={<CreateArticle/>}/>
                   </Route>
                 </Route>
                 <Route path="/auth" element={<Auth />}></Route>
-                <Route path="/" element={<Home />} />
               </Routes>
             </MainLayout>
           </>
