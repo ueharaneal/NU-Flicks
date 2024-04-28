@@ -32,6 +32,6 @@ router.post('/admin/paginate', auth('readAny', 'articles'),articlesController.ad
 router
   .route("/categories")
   .post(auth("createAny", "categories"), articlesController.createCategories)
-  .get(auth("readAny", "categories"), articlesController.getAllCategories);
+  .get(articlesController.getAllCategories);
 
 module.exports = router;

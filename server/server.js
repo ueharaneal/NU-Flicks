@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-
+const cors = require('cors')
 const routes = require("./routes/index");
 
 const mongoose = require("mongoose");
@@ -23,8 +23,8 @@ const mongoURI = process.env.MONGODB_URI;
 mongoose.connect(mongoURI);
 
 //Parsing
+app.use(cors());
 app.use(express.json());
-
 //Santize
 app.use(xss());
 app.use(mongoSanitize());

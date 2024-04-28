@@ -1,13 +1,25 @@
-import React from 'react'
-import { HoverBorderGradient } from '@/components/ui/hover-border-gradient'
+import Categories from "@/components/Feed/Categories";
 function Home() {
   return (
-    <div className='flex flex-col max-w-5/6 justify-center items-center text primary mt-20'>
-      <h1 className='text-7xl'>Welcome to <span className='text-primary'>NU Flicks</span></h1>
-      <h2 className='text-2xl'>The best movie review media</h2>
-      <h2>By Neal Uehara</h2>
+    <div className="mt-20">
+      <div className=" flex flex-col justify-center items-center text primary gap-y-2">
+        <h1 className="text-7xl">
+          Welcome to <span className="text-primary">NU Flicks</span>
+        </h1>
+        <h2 className="text-xl">The best movie review website</h2>
+        <h3 className="text-muted-foreground">Made by Neal Uehara</h3>
+        
+        <ul className="flex mt-7 text-4xl gap-x-40 text-primary">
+          <li>•</li>
+          <li>•</li>
+          <li>•</li>
+        </ul>
+        <div className="mt-5 w-5/6 text-left flex ">
+          <Categories />
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
