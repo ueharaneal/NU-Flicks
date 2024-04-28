@@ -8,7 +8,6 @@ interface PropTypes {
 
 const PreventSignIn: React.FC<PropTypes> = (props) => {
   let location = useLocation();
-  const isAuthenticated = props.users.auth
   return (
     <>
       {props.users.auth ? (

@@ -4,9 +4,6 @@ function Home() {
   return (
     <div>
       Home Page
-      <HoverBorderGradient>
-        THIS WORKS 
-      </HoverBorderGradient>
     </div>
   )
 }

@@ -13,7 +13,7 @@ import Auth from "./components/auth";
 import Header from "./components/navigation/Header";
 
 import DashboardMain from "./components/dashboard/DashboardMain";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./pages/Dashboard";
 import AuthGuard from "./components/hoc/AuthGuard";
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -41,8 +41,7 @@ function App() {
               <Routes>
                 <Route path="" element={<AuthGuard />}>
                   <Route path="/dashboard" element={<Dashboard />}>
-                    <Route index element={<DashboardMain />} />
-                    <Route path="/profile" element={<DashboardMain />} />
+                    <Route path="profile" element={<DashboardMain />} />
                   </Route>
                 </Route>
                 <Route path="/auth" element={<Auth />}></Route>
