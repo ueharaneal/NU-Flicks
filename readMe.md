@@ -1,5 +1,7 @@
 #Read and create reviews!
 ##Technologies used
+expressjs
+React
 
 Backend
 http-status
