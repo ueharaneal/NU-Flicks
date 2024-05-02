@@ -2,6 +2,10 @@
 ##Technologies used
 expressjs
 React
+frontend 
+typescript
+shadcn
+react
 
 Backend
 http-status
