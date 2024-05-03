@@ -1,11 +1,12 @@
-import React from 'react'
+import CreateArticleForm from "./CreateArticleForm"
 
 function CreateArticle() {
-  return (
-    <div>
-      This is the create articles form
-    </div>
-  )
+	return (
+		<div className='flex flex-col'>
+			<h1>Create an article</h1>
+			<CreateArticleForm />
+		</div>
+	)
 }
 
 export default CreateArticle
