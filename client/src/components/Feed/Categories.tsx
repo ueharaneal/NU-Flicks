@@ -8,6 +8,8 @@ interface Categories {
 	imageUrl: string
 	date: Date
 	id: string
+	description: string | undefined
+	link: string | undefined
 }
 function Categories() {
 	const [data, setData] = useState<Categories[] | null>(null)
@@ -39,19 +41,8 @@ function Categories() {
 	return (
 		<div className=''>
 			<h1 className='text-2xl font-bold '>Browse by Categories</h1>
-			<HoverEffect
-				items={
-					data
-						? data.map(article => {
-								return {
-									title: article.name,
-									description: "Description",
-									link: `/categories/${article.id}`,
-								}
-						  })
-						: []
-				}
-			></HoverEffect>
+			//Hover effect should take data as items
+			<HoverEffect items={data || []}></HoverEffect>
 			<div className='mt-[-70px]'>{content}</div>
 		</div>
 	)

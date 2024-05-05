@@ -2,15 +2,17 @@ import { cn } from "@/utils/cn"
 import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 
+interface Categories {
+	title?: string | "title"
+	description?: string | "Hellooo" | undefined
+	link?: string | "/dashboard" | undefined
+}
+
 export const HoverEffect = ({
 	items,
 	className,
 }: {
-	items: {
-		title: string
-		description: string
-		link: string | ""
-	}[]
+	items: Categories[]
 	className?: string
 }) => {
 	let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -51,7 +53,7 @@ export const HoverEffect = ({
 						<CardTitle>{item.title}</CardTitle>
 						<CardDescription>{item.description}</CardDescription>
 					</Card>
-				</link>
+				</a>
 			))}
 		</div>
 	)
