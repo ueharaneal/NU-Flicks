@@ -1,51 +1,53 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import AuthenticatedMenu from "./AuthenticatedMenu";
-import { RootState } from "@/store";
-import { useDispatch, useSelector } from "react-redux";
-import {setLayout} from '../../store/reducers/site'
-import {useEffect} from 'react'
-import { clearNotifications } from "@/store/reducers/notifications";
+import { Link, useNavigate, useLocation } from "react-router-dom"
+import AuthenticatedMenu from "./AuthenticatedMenu"
+import { RootState } from "@/store"
+import { useDispatch, useSelector } from "react-redux"
+import { setLayout } from "../../store/reducers/site"
+import { useEffect } from "react"
+import { clearNotifications } from "@/store/reducers/notifications"
+import { ClapperboardIcon } from "lucide-react"
 //LOGGED OUT HEADER
 const Header = () => {
-  const users = useSelector((state:RootState)=>state.users)
-  const dispatch = useDispatch()
-  const location = useLocation()
-  const notifications = useSelector((state:RootState)=>state.notifications)
-//This determines which window is going to be opened
-  useEffect(()=>{
-    let pathname = location.pathname.split('/')
-    if(pathname[1] == "dashboard"){
-      dispatch(setLayout('dash_layout'))
-    }else{
-      dispatch(setLayout(''))
-     }
-  },[location.pathname, dispatch])
-  //this determines the notifications in the header 
-  useEffect(()=>{
-    let {global} = notifications
-    if(notifications && global.error){
-        //show message 
-        const msg = global.msg ? global.msg : 'Error'
-        console.log(msg)
-        dispatch(clearNotifications())
-    }
-    if(notifications && global.success){
-      const msg = global.msg ? global.msg : 'Good!'
-      console.log(msg)
-      dispatch(clearNotifications())
-    }
-  },[notifications])
+	const users = useSelector((state: RootState) => state.users)
+	const dispatch = useDispatch()
+	const location = useLocation()
+	const notifications = useSelector((state: RootState) => state.notifications)
+	//This determines which window is going to be opened
+	useEffect(() => {
+		let pathname = location.pathname.split("/")
+		if (pathname[1] == "dashboard") {
+			dispatch(setLayout("dash_layout"))
+		} else {
+			dispatch(setLayout(""))
+		}
+	}, [location.pathname, dispatch])
+	//this determines the notifications in the header
+	useEffect(() => {
+		let { global } = notifications
+		if (notifications && global.error) {
+			//show message
+			const msg = global.msg ? global.msg : "Error"
+			console.log(msg)
+			dispatch(clearNotifications())
+		}
+		if (notifications && global.success) {
+			const msg = global.msg ? global.msg : "Good!"
+			console.log(msg)
+			dispatch(clearNotifications())
+		}
+	}, [notifications])
 
-  return (
-    <div className="fixed-top flex flex-row px-10 py-3 w-full justify-between border-b-4 border-foreground">
-      <Link to="/">
-        <h1 className="text-primary p-2 rounded-lg text-heavy text-4xl hover:bg-muted">
-          NU FL<span className="text-foreground">i</span>CKS
-        </h1>
-      </Link>
-      <AuthenticatedMenu users={users}/>
-    </div>
-  );
-};
+	return (
+		<div className='fixed-top flex flex-row px-10  w-full items-center justify-between border-b-2 border-border shadow-md'>
+			<Link to='/'>
+				<div className='text-primary rounded-lg font-semi text-4xl flex flex-row gap-x-2 items-center'>
+					NU FLICKS{" "}
+					<ClapperboardIcon className='text-foreground' size={32} />
+				</div>
+			</Link>
+			<AuthenticatedMenu users={users} />
+		</div>
+	)
+}
 
-export default Header;
+export default Header
