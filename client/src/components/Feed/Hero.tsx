@@ -2,12 +2,12 @@ import React from "react"
 import HeroCards from "./HeroCards"
 const Hero: React.FC = () => {
 	return (
-		<div className='flex flex-row w-5/6  justify-around items-center text-center'>
+		<div className='flex flex-row w-5/6  justify-center items-center text-center mt-16 '>
 			<div className='text-lg md:text-2xl gap-y-3 flex flex-col'>
 				{" "}
-				<h1 className='text-primary font-bold text-2xl md:text-7xl uppercase'>
+				<h1 className='text-primary font-bold text-2xl md:text-6xl uppercase'>
 					{" "}
-					The best movie website!
+					The best movie review website!
 				</h1>{" "}
 				<p className=''>Find or fight with your haters...</p>{" "}
 			</div>
