@@ -9,6 +9,7 @@ function Home() {
 					<p>Feed </p>
 					<Categories />
 				</div>
+				3
 			</div>
 		</div>
 	)

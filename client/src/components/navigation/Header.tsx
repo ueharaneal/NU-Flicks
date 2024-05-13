@@ -38,7 +38,7 @@ const Header = () => {
 	}, [notifications])
 
 	return (
-		<div className='fixed-top flex flex-row px-10  w-full items-center justify-between border-b-2 border-border shadow-md'>
+		<div className='fixed-top flex flex-row px-10  w-full items-center justify-between border-b-2 border-border shadow-md py-3'>
 			<Link to='/'>
 				<div className='text-primary rounded-lg font-semi text-4xl flex flex-row gap-x-2 items-center'>
 					NU FLICKS{" "}
