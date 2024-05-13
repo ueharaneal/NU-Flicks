@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import CategoriesCard from "./CategoriesCard"
 import { movieGenres } from "@/utils/constants"
 interface GenreProps {
@@ -11,15 +12,19 @@ function BrowseCategories() {
 			<h2 className='text-4xl text-left uppercase font-bold'>
 				Browse by categories
 			</h2>
-			<div className='grid grid-cols-5 gap-x-4 mt-10 '>
+			<div className='grid grid-cols-2 lg:grid-cols-5 gap-x-4  -mt-8 lg:mt-1'>
 				{movieGenres.map((genre: GenreProps, index: number) => (
-					<div key={index} className='-my-24'>
+					<Link
+						key={index}
+						className='-my-32 '
+						to={`/categories/${genre.name.toLowerCase()}`}
+					>
 						<CategoriesCard
 							key={index}
 							name={genre.name}
 							imageUrl={genre.imgUrl}
 						/>
-					</div>
+					</Link>
 				))}
 			</div>
 		</div>
