@@ -10,6 +10,7 @@ const Hero: React.FC = () => {
 					The best movie review website!
 				</h1>{" "}
 				<p className=''>Find or fight with your haters...</p>{" "}
+				<p className='text-sm text-muted-foreground'>By Neal Uehara</p>{" "}
 			</div>
 			<div>
 				<HeroCards />

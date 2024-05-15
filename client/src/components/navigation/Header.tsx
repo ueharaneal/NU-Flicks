@@ -4,14 +4,12 @@ import { RootState } from "@/store"
 import { useDispatch, useSelector } from "react-redux"
 import { setLayout } from "../../store/reducers/site"
 import { useEffect } from "react"
-import { clearNotifications } from "@/store/reducers/notifications"
 import { ClapperboardIcon } from "lucide-react"
 //LOGGED OUT HEADER
 const Header = () => {
 	const users = useSelector((state: RootState) => state.users)
 	const dispatch = useDispatch()
 	const location = useLocation()
-	const notifications = useSelector((state: RootState) => state.notifications)
 	//This determines which window is going to be opened
 	useEffect(() => {
 		let pathname = location.pathname.split("/")
@@ -22,23 +20,8 @@ const Header = () => {
 		}
 	}, [location.pathname, dispatch])
 	//this determines the notifications in the header
-	useEffect(() => {
-		let { global } = notifications
-		if (notifications && global.error) {
-			//show message
-			const msg = global.msg ? global.msg : "Error"
-			console.log(msg)
-			dispatch(clearNotifications())
-		}
-		if (notifications && global.success) {
-			const msg = global.msg ? global.msg : "Good!"
-			console.log(msg)
-			dispatch(clearNotifications())
-		}
-	}, [notifications])
-
 	return (
-		<div className='fixed-top flex flex-row px-10  w-full items-center justify-between border-b-2 border-border shadow-md py-3'>
+		<div className='fixed-top flex flex-row px-10  w-full items-center justify-between border-b-2 border-border shadow-md'>
 			<Link to='/'>
 				<div className='text-primary rounded-lg font-semi text-4xl flex flex-row gap-x-2 items-center'>
 					NU FLICKS{" "}
