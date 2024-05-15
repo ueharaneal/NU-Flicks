@@ -12,7 +12,7 @@ function BrowseCategories() {
 			<h2 className='text-4xl text-left uppercase font-bold'>
 				Browse by categories
 			</h2>
-			<div className='grid grid-cols-2 lg:grid-cols-5 gap-x-4  -mt-8 lg:mt-1'>
+			<div className='grid grid-cols-2 lg:grid-cols-7 gap-x-4 -mt-8 lg:mt-1'>
 				{movieGenres.map((genre: GenreProps, index: number) => (
 					<Link
 						key={index}
