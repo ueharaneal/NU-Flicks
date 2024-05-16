@@ -2,6 +2,13 @@ import React from "react"
 import { useForm, Resolver } from "react-hook-form"
 import z from "zod"
 
+import {
+	Step,
+	Stepper,
+	useStepper,
+	type StepItem,
+} from "@/components/ui/stepper"
+
 type FormValues = {
 	title: string
 	description: string
