@@ -2,7 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import React from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+
+import { justGenreNames } from "@/utils/constants"
+
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import {
 	Form,
 	FormControl,
@@ -13,7 +17,13 @@ import {
 	FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import useFormStatus from "react-dom"
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select"
 
 const formSchema = z.object({
 	title: z
@@ -21,7 +31,7 @@ const formSchema = z.object({
 		.min(2, { message: "Title is too short" }),
 	description: z.string({ message: "Description is required" }),
 	actors: z.array(z.string()),
-	genres: z.array(z.string()),
+	genres: z.string({ message: "Genre is required" }),
 })
 type FormValues = z.infer<typeof formSchema>
 
@@ -30,7 +40,7 @@ const CreateArticleForm = () => {
 		title: "",
 		description: "",
 		actors: ["Actor1", "Actor2"],
-		genres: ["Comedy", "Drama"],
+		genres: "",
 	}
 
 	const form = useForm<FormValues>({
@@ -43,57 +53,126 @@ const CreateArticleForm = () => {
 	}
 	return (
 		// Your JSX/HTML code goes here
-		<div>
-			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-5'>
-					<FormField
-						control={form.control}
-						name='title'
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Movie Title</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										type='text'
-										placeholder='Enter movie title'
-									/>
-								</FormControl>
-								<FormDescription />
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name='description'
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Description</FormLabel>
-								<FormControl>
-									<Input
-										{...field}
-										type='text'
-										placeholder='Enter movie description'
-									/>
-								</FormControl>
-								<FormDescription />
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<Button
-						type='submit'
-						variant='default'
-						className='w-full'
-						disabled={form.formState.isSubmitting}
+		<Card>
+			<CardHeader>
+				<h2 className='text-2xl font-semibold'>Create a Movie Article</h2>
+			</CardHeader>
+			<CardContent>
+				<Form {...form}>
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						className='space-y-5 '
 					>
-						{" "}
-						Create Article{" "}
-					</Button>
-				</form>
-			</Form>
-		</div>
+						<FormField
+							control={form.control}
+							name='title'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Movie Title</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											type='text'
+											placeholder='Enter movie title'
+										/>
+									</FormControl>
+									<FormDescription />
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='description'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Description</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											type='text'
+											placeholder='Enter movie description'
+										/>
+									</FormControl>
+									<FormDescription />
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<div className='flex flex-row gap-x-5 justify-around'>
+							<FormField
+								control={form.control}
+								name='actors'
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Actors</FormLabel>
+										<FormControl>
+											<Input
+												{...field}
+												type='text'
+												placeholder='Enter actors'
+												className='w-full'
+											/>
+										</FormControl>
+										<FormDescription />
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name='genres'
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Genres</FormLabel>
+										<Select
+											defaultValue=''
+											onValueChange={field.onChange}
+										>
+											<FormControl>
+												<SelectTrigger className='lg:min-w-[300px]'>
+													<SelectValue placeholder="Select the movie's genre" />
+												</SelectTrigger>
+											</FormControl>
+											<SelectContent>
+												{justGenreNames.map(genre => (
+													<SelectItem key={genre} value={genre}>
+														{genre.charAt(0).toUpperCase() +
+															genre.slice(1)}
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
+										<FormDescription />
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</div>
+						<div className='flex flex-row gap-x-5 justify-center'>
+							<Button
+								type='reset'
+								variant='secondary'
+								className='w-[40%] rounded-md'
+								disabled={form.formState.isSubmitting}
+							>
+								Save Draft
+							</Button>
+
+							<Button
+								type='submit'
+								variant='default'
+								className='w-[40%] rounded-md'
+								disabled={form.formState.isSubmitting}
+							>
+								{" "}
+								Create Article{" "}
+							</Button>
+						</div>
+					</form>
+				</Form>
+			</CardContent>
+		</Card>
 	)
 }
 

@@ -16,7 +16,7 @@ function BrowseCategories() {
 				{movieGenres.map((genre: GenreProps, index: number) => (
 					<Link
 						key={index}
-						className='-my-32 '
+						className=''
 						to={`/categories/${genre.name.toLowerCase()}`}
 					>
 						<CategoriesCard
