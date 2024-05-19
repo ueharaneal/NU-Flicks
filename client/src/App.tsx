@@ -15,7 +15,9 @@ import Header from "./components/navigation/Header"
 import DashboardMain from "./components/dashboard/DashboardMain"
 import Dashboard from "./pages/Dashboard"
 import AuthGuard from "./components/hoc/AuthGuard"
-import CreateArticle from "./components/dashboard/CreateArticle"
+import CreateArticle from "./components/dashboard/articles/Articles"
+import Explore from "./components/dashboard/explore/Explore"
+
 function App() {
 	const [loading, setLoading] = useState<boolean>(true)
 	const dispatch = useDispatch<AppDispatch>()
@@ -43,13 +45,14 @@ function App() {
 								<Route path='/' element={<Home />} />
 								<Route path='' element={<AuthGuard />}>
 									<Route path='/dashboard' element={<Dashboard />}>
-										<Route path='home' element={<DashboardMain />} />
+										<Route path='feed' element={<DashboardMain />} />
 										<Route
 											path='profile'
 											element={<DashboardMain />}
 										/>
+										<Route path='explore' element={<Explore />} />
 										<Route
-											path='create'
+											path='articles'
 											element={<CreateArticle />}
 										/>
 									</Route>

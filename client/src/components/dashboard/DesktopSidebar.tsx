@@ -5,7 +5,7 @@ const NAVLINKS = [
 	{
 		title: "Feed",
 		icon: <PanelTopDashed size={32} />,
-		path: "home",
+		path: "feed",
 	},
 	{
 		title: "Explore",
@@ -13,9 +13,9 @@ const NAVLINKS = [
 		path: "explore",
 	},
 	{
-		title: "Create Article",
+		title: "Articles",
 		icon: <PenLine size={32} />,
-		path: "create",
+		path: "articles",
 	},
 	{
 		title: "Profile",
@@ -25,7 +25,7 @@ const NAVLINKS = [
 ]
 function DeskTopSidebar() {
 	return (
-		<div className='flex flex-col items-center justify-center border-secondary-foreground border-b-2 border-r-2 h-[965px] overflow-clip'>
+		<div className='flex flex-col items-center justify-center border-border border-b-2 border-r-2 h-[965px] overflow-clip'>
 			{NAVLINKS.map(link => {
 				return (
 					<Link
@@ -37,7 +37,7 @@ function DeskTopSidebar() {
 							{link.icon}
 							{link.title}
 						</div>
-						<div className='border-secondary border-y-2 w-[120px]' />
+						<div className='border-border border w-[120px]' />
 					</Link>
 				)
 			})}
