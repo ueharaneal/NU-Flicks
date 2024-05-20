@@ -47,9 +47,12 @@ const CreateArticleForm = () => {
 		resolver: zodResolver(formSchema),
 		defaultValues: initialValues,
 	})
-
-	const onSubmit = (data: FormValues) => {
-		console.log(data)
+	const saveAsDraft = (formData: FormValues) => {
+		console.log("Saving as draft:", formData)
+		// Perform the logic to save the form data as a draft
+	}
+	const onSubmit = async (data: FormValues) => {
+		console.log("Submitting:", data)
 	}
 	return (
 		// Your JSX/HTML code goes here
@@ -151,10 +154,11 @@ const CreateArticleForm = () => {
 						</div>
 						<div className='flex flex-row gap-x-5 justify-center'>
 							<Button
-								type='reset'
+								type='button'
 								variant='secondary'
 								className='w-[40%] rounded-md'
 								disabled={form.formState.isSubmitting}
+								onClick={() => saveAsDraft(form.getValues())}
 							>
 								Save Draft
 							</Button>
