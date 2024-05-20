@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import React from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { genreNamesAndValues } from "@/utils/constants"
-
+import ActorsSearch from "./ActorsSearch"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import {
@@ -17,16 +17,22 @@ import {
 	FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select"
-
-import MultipleSelector from "@/components/ui//mutliple-selector"
+import MultipleSelector, { Option } from "@/components/ui//mutliple-selector"
 import { useToast } from "@/components/ui/use-toast"
+
+const OPTIONS: Option[] = [
+	{ label: "nextjs", value: "Nextjs" },
+	{ label: "React", value: "react" },
+	{ label: "Remix", value: "remix" },
+	{ label: "Vite", value: "vite" },
+	{ label: "Nuxt", value: "nuxt" },
+	{ label: "Vue", value: "vue" },
+	{ label: "Svelte", value: "svelte" },
+	{ label: "Angular", value: "angular" },
+	{ label: "Ember", value: "ember", disable: true },
+	{ label: "Gatsby", value: "gatsby", disable: true },
+	{ label: "Astro", value: "astro" },
+]
 
 const optionSchema = z.object({
 	label: z.string(),
@@ -39,7 +45,7 @@ const formSchema = z.object({
 		.string({ message: "Title is required" })
 		.min(2, { message: "Title is too short" }),
 	description: z.string({ message: "Description is required" }),
-	actors: z.array(z.string()),
+	actors: z.array(optionSchema).min(1),
 	genres: z.array(optionSchema).min(1),
 })
 type FormValues = z.infer<typeof formSchema>
@@ -48,7 +54,7 @@ const CreateArticleForm = () => {
 	const initialValues: FormValues = {
 		title: "",
 		description: "",
-		actors: ["Actor1", "Actor2"],
+		actors: [],
 		genres: [],
 	}
 
@@ -63,6 +69,9 @@ const CreateArticleForm = () => {
 	const onSubmit = async (data: FormValues) => {
 		console.log("Submitting:", data)
 	}
+
+	const [actorValue, setActorValue] = useState<Option[]>([])
+
 	const { toast } = useToast()
 
 	const handleGenreMaxSelected = () => {
@@ -72,6 +81,12 @@ const CreateArticleForm = () => {
 			variant: "destructive",
 		})
 	}
+
+	const handleActorChange = (values: string) => {
+		setActorValue([{ label: values, value: values }])
+		ActorsSearch(values)
+	}
+
 	return (
 		// Your JSX/HTML code goes here
 		<Card>
@@ -120,54 +135,72 @@ const CreateArticleForm = () => {
 								</FormItem>
 							)}
 						/>
-						<div className='flex flex-row gap-x-5 justify-around'>
-							<FormField
-								control={form.control}
-								name='actors'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Actors</FormLabel>
-										<FormControl>
-											<Input
-												{...field}
-												type='text'
-												placeholder='Enter actors'
-												className='w-full'
-											/>
-										</FormControl>
-										<FormDescription />
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name='genres'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Genres</FormLabel>
-										<FormControl>
-											<MultipleSelector
-												{...field}
-												defaultOptions={genreNamesAndValues}
-												placeholder='Select genres'
-												maxSelected={4}
-												onMaxSelected={() => {
-													handleGenreMaxSelected()
-												}}
-												emptyIndicator={
-													<p className='text-center text-lg leading-10 text-gray-600 dark:text-gray-400'>
-														no results found.
-													</p>
-												}
-											/>
-										</FormControl>
-										<FormDescription />
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						</div>
+
+						<FormField
+							control={form.control}
+							name='actors'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Actors</FormLabel>
+									<FormControl>
+										<MultipleSelector
+											{...field}
+											value={actorValue}
+											onChange={handleActorChange}
+											defaultOptions={OPTIONS}
+											placeholder='Select actors'
+											maxSelected={4}
+											hidePlaceholderWhenSelected={true}
+											triggerSearchOnFocus={true}
+											onMaxSelected={() => {
+												toast({
+													title: "Maximum genres selected",
+													description:
+														"You can only select a maximum of 4 actors",
+													variant: "destructive",
+												})
+											}}
+											emptyIndicator={
+												<p className='text-center text-lg leading-10 text-gray-600 dark:text-gray-400'>
+													no results found.
+												</p>
+											}
+										/>
+									</FormControl>
+									<FormDescription />
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='genres'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Genres</FormLabel>
+									<FormControl>
+										<MultipleSelector
+											{...field}
+											defaultOptions={genreNamesAndValues}
+											placeholder='Select genres'
+											maxSelected={4}
+											hidePlaceholderWhenSelected={true}
+											triggerSearchOnFocus={true}
+											onMaxSelected={() => {
+												handleGenreMaxSelected()
+											}}
+											emptyIndicator={
+												<p className='text-center text-lg leading-10 text-gray-600 dark:text-gray-400'>
+													no results found.
+												</p>
+											}
+										/>
+									</FormControl>
+									<FormDescription />
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 						<div className='flex flex-row gap-x-5 justify-center'>
 							<Button
 								type='button'
