@@ -1,3 +1,4 @@
+import { Option } from "@/components/ui/mutliple-selector"
 export const movieGenres = [
 	{
 		name: "Action",
@@ -89,24 +90,24 @@ export const movieGenres = [
 	},
 ]
 
-export const justGenreNames = [
-	"action",
-	"adventure",
-	"animation",
-	"comedy",
-	"crime",
-	"documentary",
-	"drama",
-	"family",
-	"fantasy",
-	"history",
-	"horror",
-	"music",
-	"mystery",
-	"romance",
-	"science fiction",
-	"tv movie",
-	"thriller",
-	"war",
-	"western",
+export const genreNamesAndValues: Option[] = [
+	{ label: "Action", value: "action" },
+	{ label: "Adventure", value: "adventure" },
+	{ label: "Animation", value: "animation" },
+	{ label: "Comedy", value: "comedy" },
+	{ label: "Crime", value: "crime" },
+	{ label: "Documentary", value: "documentary" },
+	{ label: "Drama", value: "drama" },
+	{ label: "Family", value: "family" },
+	{ label: "Fantasy", value: "fantasy" },
+	{ label: "History", value: "history" },
+	{ label: "Horror", value: "horror" },
+	{ label: "Music", value: "music" },
+	{ label: "Mystery", value: "mystery" },
+	{ label: "Romance", value: "romance" },
+	{ label: "Science Fiction", value: "science fiction" },
+	{ label: "TV Movie", value: "tv movie" },
+	{ label: "Thriller", value: "thriller" },
+	{ label: "War", value: "war" },
+	{ label: "Western", value: "western" },
 ]

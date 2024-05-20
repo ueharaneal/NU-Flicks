@@ -3,7 +3,7 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { justGenreNames } from "@/utils/constants"
+import { genreNamesAndValues } from "@/utils/constants"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -25,13 +25,22 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 
+import MultipleSelector from "@/components/ui//mutliple-selector"
+import { useToast } from "@/components/ui/use-toast"
+
+const optionSchema = z.object({
+	label: z.string(),
+	value: z.string(),
+	disable: z.boolean().optional(),
+})
+
 const formSchema = z.object({
 	title: z
 		.string({ message: "Title is required" })
 		.min(2, { message: "Title is too short" }),
 	description: z.string({ message: "Description is required" }),
 	actors: z.array(z.string()),
-	genres: z.string({ message: "Genre is required" }),
+	genres: z.array(optionSchema).min(1),
 })
 type FormValues = z.infer<typeof formSchema>
 
@@ -40,7 +49,7 @@ const CreateArticleForm = () => {
 		title: "",
 		description: "",
 		actors: ["Actor1", "Actor2"],
-		genres: "",
+		genres: [],
 	}
 
 	const form = useForm<FormValues>({
@@ -53,6 +62,15 @@ const CreateArticleForm = () => {
 	}
 	const onSubmit = async (data: FormValues) => {
 		console.log("Submitting:", data)
+	}
+	const { toast } = useToast()
+
+	const handleGenreMaxSelected = () => {
+		toast({
+			title: "Maximum genres selected",
+			description: "You can only select a maximum of 4 genres",
+			variant: "destructive",
+		})
 	}
 	return (
 		// Your JSX/HTML code goes here
@@ -128,24 +146,22 @@ const CreateArticleForm = () => {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Genres</FormLabel>
-										<Select
-											defaultValue=''
-											onValueChange={field.onChange}
-										>
-											<FormControl>
-												<SelectTrigger className='lg:min-w-[300px]'>
-													<SelectValue placeholder="Select the movie's genre" />
-												</SelectTrigger>
-											</FormControl>
-											<SelectContent>
-												{justGenreNames.map(genre => (
-													<SelectItem key={genre} value={genre}>
-														{genre.charAt(0).toUpperCase() +
-															genre.slice(1)}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
+										<FormControl>
+											<MultipleSelector
+												{...field}
+												defaultOptions={genreNamesAndValues}
+												placeholder='Select genres'
+												maxSelected={4}
+												onMaxSelected={() => {
+													handleGenreMaxSelected()
+												}}
+												emptyIndicator={
+													<p className='text-center text-lg leading-10 text-gray-600 dark:text-gray-400'>
+														no results found.
+													</p>
+												}
+											/>
+										</FormControl>
 										<FormDescription />
 										<FormMessage />
 									</FormItem>

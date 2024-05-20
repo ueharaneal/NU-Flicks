@@ -21,7 +21,7 @@ const Header = () => {
 	}, [location.pathname, dispatch])
 	//this determines the notifications in the header
 	return (
-		<div className='fixed-top flex flex-row px-10  w-full items-center justify-between border-b-2 border-border shadow-md'>
+		<div className='fixed-top flex flex-row px-10 pb-2 pt-1 w-full items-center justify-between border-b-2 border-border shadow-md'>
 			<Link to='/'>
 				<div className='text-primary rounded-lg font-semi text-4xl flex flex-row gap-x-2 items-center'>
 					NU FLICKS{" "}
