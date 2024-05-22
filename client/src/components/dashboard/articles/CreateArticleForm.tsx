@@ -47,6 +47,7 @@ const formSchema = z.object({
 	description: z.string({ message: "Description is required" }),
 	actors: z.array(optionSchema).min(1),
 	genres: z.array(optionSchema).min(1),
+	rating: z.number().min(0).max(4),
 })
 type FormValues = z.infer<typeof formSchema>
 
@@ -56,6 +57,7 @@ const CreateArticleForm = () => {
 		description: "",
 		actors: [],
 		genres: [],
+		rating: 0.0,
 	}
 
 	const form = useForm<FormValues>({
