@@ -72,7 +72,10 @@ const CreateArticleForm = () => {
 		console.log("Submitting:", data)
 	}
 
-	const [actorValue, setActorValue] = useState<Option[]>([])
+	const [actorValue, setActorValue] = useState<Option>({
+		label: "",
+		value: "",
+	})
 
 	const { toast } = useToast()
 
@@ -84,8 +87,11 @@ const CreateArticleForm = () => {
 		})
 	}
 
-	const handleActorChange = (values: string) => {
-		setActorValue([{ label: values, value: values }])
+	const handleActorChange = (values: Option) => {
+		setActorValue({
+			label: values.labels! as string,
+			value: values.values! as string,
+		})
 		ActorsSearch(values)
 	}
 
