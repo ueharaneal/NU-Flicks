@@ -45,7 +45,9 @@ const formSchema = z.object({
 		.string({ message: "Title is required" })
 		.min(2, { message: "Title is too short" }),
 	description: z.string({ message: "Description is required" }),
-	actors: z.array(optionSchema).min(1),
+	actors: z
+		.array(optionSchema)
+		.min(1, { message: "At least one actor is required" }),
 	genres: z.array(optionSchema).min(1),
 	rating: z.number().min(0).max(4),
 })
@@ -72,10 +74,7 @@ const CreateArticleForm = () => {
 		console.log("Submitting:", data)
 	}
 
-	const [actorValue, setActorValue] = useState<Option>({
-		label: "",
-		value: "",
-	})
+	const [actorValue, setActorValue] = useState<Option[]>([])
 
 	const { toast } = useToast()
 
@@ -88,11 +87,15 @@ const CreateArticleForm = () => {
 	}
 
 	const handleActorChange = (values: Option) => {
-		setActorValue({
-			label: values.labels! as string,
-			value: values.values! as string,
-		})
-		ActorsSearch(values)
+		setActorValue(prevValues => [
+			...prevValues,
+			{
+				label: values.label as string,
+				value: values.value as string,
+			},
+		])
+		// ActorsSearch(values) // Uncomment this if you want to call the ActorsSearch function
+		console.log("values", values)
 	}
 
 	return (
@@ -154,7 +157,9 @@ const CreateArticleForm = () => {
 										<MultipleSelector
 											{...field}
 											value={actorValue}
-											onChange={handleActorChange}
+											onChange={() => {
+												console.log("values", field)
+											}}
 											defaultOptions={OPTIONS}
 											placeholder='Select actors'
 											maxSelected={4}
