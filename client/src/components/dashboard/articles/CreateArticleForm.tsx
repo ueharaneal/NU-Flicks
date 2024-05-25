@@ -1,12 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import { createArticlePost } from "@/api/articles"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
 import { genreNamesAndValues } from "@/utils/constants"
-import ActorsSearch from "./ActorsSearch"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import {
 	Form,
 	FormControl,
@@ -19,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import MultipleSelector, { Option } from "@/components/ui/mutliple-selector"
 import { useToast } from "@/components/ui/use-toast"
+import { useMutation } from "@tanstack/react-query"
 
 const optionSchema = z.object({
 	label: z.string(),
@@ -41,6 +40,9 @@ export type CreateArticleFormValues = z.infer<typeof formSchema>
 
 export default function CreateArticleForm() {
 	const { toast } = useToast()
+
+	//const { asyncMuta } = useMutation(createArticlePost(data))
+
 	const initialValues: CreateArticleFormValues = {
 		title: "",
 		description: "",
@@ -69,6 +71,8 @@ export default function CreateArticleForm() {
 
 	const onSubmit = async (data: CreateArticleFormValues) => {
 		console.log("Submitting:", data)
+		const response = await createArticlePost(data)
+		console.log(response)
 	}
 
 	const handleActorChange = (values: Option[]) => {
