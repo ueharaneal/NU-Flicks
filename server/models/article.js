@@ -18,15 +18,14 @@ const articleSchema = mongoose.Schema({
 		required: [true, "You need a title"],
 		maxLength: 500,
 	},
-	score: {
+	rating: {
 		type: Number,
 		min: 0,
-		max: 100,
+		max: 10,
 		required: true,
 	},
 	director: {
 		type: String,
-		required: true,
 	},
 	actors: {
 		type: [String],

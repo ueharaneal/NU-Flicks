@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios"
+import axios from "axios"
 import { CreateArticleFormValues } from "@/components/dashboard/articles/CreateArticleForm"
 import { getTokenCookie } from "../utils/tools"
 
@@ -11,8 +11,14 @@ export const createArticlePost = async (data: CreateArticleFormValues) => {
 			headers: { Authorization: `Bearer ${token}` },
 		})
 		return request.data
-	} catch (error: AxiosError) {
-		console.error(error.response.data.errors)
-		throw error
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			// Handle AxiosError
+			console.error("Axios error:", error.response?.data)
+		} else {
+			// Handle unexpected error
+			console.error("Unexpected error:", error)
+		}
+		throw error // Re-throw the error after logging it
 	}
 }
