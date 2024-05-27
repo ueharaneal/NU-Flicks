@@ -9,9 +9,9 @@ const articleSchema = mongoose.Schema({
 		required: [true, "You need a title"],
 		maxLength: 100,
 	},
-	content: {
+	description: {
 		type: String,
-		required: [true, "You need a content"],
+		required: [true, "You need a description"],
 	},
 	excerpt: {
 		type: String,
