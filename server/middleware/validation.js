@@ -8,18 +8,9 @@ const addArticleValidator = [
 		.isEmpty()
 		.withMessage("You need to add a title")
 		.bail()
-		.isLength({ min: 3 })
-		.withMessage("Minimum of 3 is required"),
+		.isLength({ min: 2 })
+		.withMessage("Minimum of 2 is required"),
 
-	check("director")
-		.trim()
-		.bail()
-		.not()
-		.isBoolean()
-		.withMessage("you cannot add a bool here")
-		.bail()
-		.withMessage("Check the size")
-		.bail(),
 	(req, res, next) => {
 		const errors = validationResult(req)
 		if (!errors.isEmpty()) {
