@@ -7,7 +7,7 @@ const articleSchema = mongoose.Schema({
 	title: {
 		type: String,
 		required: [true, "You need a title"],
-		maxLength: 100,
+		maxLength: 80,
 	},
 	ratingDescription: {
 		type: String,
