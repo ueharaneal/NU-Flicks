@@ -200,6 +200,22 @@ export default function CreateArticleForm() {
 								</FormItem>
 							)}
 						/>
+						<FormField
+							control={form.control}
+							name='rating'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Rating</FormLabel>
+									<FormControl>
+										<Input
+											{...field}
+											type='number'
+											placeholder='Enter rating'
+										/>
+									</FormControl>
+								</FormItem>
+							)}
+						/>
 						<div className='flex flex-row gap-x-5 justify-center'>
 							<Button
 								type='button'
