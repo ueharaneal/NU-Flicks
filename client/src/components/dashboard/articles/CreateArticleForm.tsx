@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input"
 import MultipleSelector, { Option } from "@/components/ui/mutliple-selector"
 import { useToast } from "@/components/ui/use-toast"
 import { useMutation } from "@tanstack/react-query"
+import { RatingContainer } from "./RatingContainer"
 
 const optionSchema = z.object({
 	label: z.string(),
@@ -212,6 +213,7 @@ export default function CreateArticleForm() {
 											type='number'
 											placeholder='Enter rating'
 										/>
+										<RatingContainer />
 									</FormControl>
 								</FormItem>
 							)}
