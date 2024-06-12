@@ -190,7 +190,7 @@ export default function CreateArticleForm() {
 											}}
 											emptyIndicator={
 												<p className='text-center text-lg leading-10 text-gray-600 dark:text-gray-400'>
-													no results found...
+													No results found...
 												</p>
 											}
 										/>
