@@ -20,5 +20,6 @@ export const createArticlePost = async (data: CreateArticleFormValues) => {
 			console.error("Unexpected error:", error)
 		}
 		throw error // Re-throw the error after logging it
+		//i need to change the authenticaion method
 	}
 }
