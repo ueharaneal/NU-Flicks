@@ -16,6 +16,7 @@ function index() {
 	const handleRegisterChange = () => {
 		setIsRegistered(!isRegistered)
 	}
+	//we need to allow the user to get result from the server response
 	return (
 		<PreventSignIn users={users}>
 			<div className='flex flex-row items-center h-screen justify-center'>
