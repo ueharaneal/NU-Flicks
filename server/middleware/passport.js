@@ -1,15 +1,14 @@
 const { User } = require("../models/user")
 require("dotenv").config()
 const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt")
+const GoogleStrategy = require("passport-google-oauth20").Strategy
+const passport = require("passport")
 
 const jwtOptions = {
 	secretOrKey: process.env.DB_SECRET,
 	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 }
 
-//verify decodes the token
-//then you can access the user information.
-//the payload is whatever we use to sign the token
 const jwtVerify = async (payload, done) => {
 	try {
 		const user = await User.findById(payload.sub)
@@ -22,10 +21,32 @@ const jwtVerify = async (payload, done) => {
 	}
 }
 
-//inside of the Strategy object we want to pass in the options then the callback
 const jwtStrategy = new JwtStrategy(jwtOptions, jwtVerify)
 
-module.exports = { jwtStrategy }
+// Google oAuth Strategy configuration
+passport.use(
+	new GoogleStrategy(
+		{
+			clientID: process.env.GOOGLE_CLIENT_ID,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+			callbackURL: "/auth/google/callback",
+		},
+		async (token, tokenSecret, profile, done) => {
+			try {
+				let user = await User.findOne({ googleId: profile.id })
+				if (!user) {
+					user = await User.create({
+						googleId: profile.id,
+						username: profile.displayName,
+						email: profile.emails[0].value,
+					})
+				}
+				done(null, user)
+			} catch (error) {
+				done(error, false)
+			}
+		}
+	)
+)
 
-//once the req is made, it gets the token and decodes it
-//verify it and then return the user
+module.exports = { jwtStrategy }

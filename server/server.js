@@ -12,7 +12,7 @@ const { xss } = require("express-xss-sanitizer")
 const mongoSanitize = require("express-mongo-sanitize")
 
 const passport = require("passport")
-var GoogleStrategy = require("passport-google-oidc")
+
 const { jwtStrategy } = require("./middleware/passport")
 //we need to add google strategy
 const { handleError, convertToApiError } = require("./middleware/apiError")
@@ -32,6 +32,19 @@ app.use(mongoSanitize())
 //Passport
 app.use(passport.initialize())
 passport.use("jwt", jwtStrategy)
+// Google Auth routes
+app.get(
+	"/auth/google",
+	passport.authenticate("google", { scope: ["profile", "email"] })
+)
+app.get(
+	"/auth/google/callback",
+	passport.authenticate("google", { failureRedirect: "/" }),
+	(req, res) => {
+		res.redirect("/your-redirect-url") // Replace with your frontend URL
+	}
+)
+
 //routes
 app.use("/api", routes)
 
