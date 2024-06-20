@@ -44,7 +44,7 @@ app.get(
 		res.redirect("/your-redirect-url") // Replace with your frontend URL
 	}
 )
-//we need to create a new reroute
+//we need to create a new reroute for the googl auth
 
 //routes
 app.use("/api", routes)
