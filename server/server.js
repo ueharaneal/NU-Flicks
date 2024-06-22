@@ -42,7 +42,7 @@ app.get(
 	passport.authenticate("google", { failureRedirect: "/" }),
 	(req, res) => {
 		res.redirect("/your-redirect-url") // Replace with your frontend URL
-	} //
+	} //still need to add
 )
 //we need to create a new reroute for the googl auth
 
