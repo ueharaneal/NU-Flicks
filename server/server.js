@@ -32,7 +32,7 @@ app.use(mongoSanitize())
 //Passport
 app.use(passport.initialize())
 passport.use("jwt", jwtStrategy)
-// Google Auth routes for auth
+// Google Auth routes for auth more comments
 app.get(
 	"/auth/google",
 	passport.authenticate("google", { scope: ["profile", "email"] })
