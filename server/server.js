@@ -49,7 +49,7 @@ app.get(
 //routes
 app.use("/api", routes)
 
-//make sure this is after the routes so that it can catch the error
+//make sure this is after the routes so that it can catch the error yuh
 //error handling
 app.use(convertToApiError)
 app.use((err, req, res, next) => {
