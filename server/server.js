@@ -22,7 +22,7 @@ const mongoURI = process.env.MONGODB_URI
 
 mongoose.connect(mongoURI)
 
-//Parsing
+//Parsing and cores
 app.use(cors())
 app.use(express.json())
 //Santize
