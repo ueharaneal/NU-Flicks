@@ -21,7 +21,7 @@ const port = process.env.PORT || 3002
 const mongoURI = process.env.MONGODB_URI
 
 mongoose.connect(mongoURI)
-
+// git add .
 //Parsing and cores
 app.use(cors())
 app.use(express.json())
