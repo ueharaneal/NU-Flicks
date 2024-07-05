@@ -14,7 +14,7 @@ const mongoSanitize = require("express-mongo-sanitize")
 const passport = require("passport")
 
 const { jwtStrategy } = require("./middleware/passport")
-//we need to add google strategy
+//we need to add google strategy //comment out
 const { handleError, convertToApiError } = require("./middleware/apiError")
 
 const port = process.env.PORT || 3002
