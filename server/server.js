@@ -26,7 +26,7 @@ mongoose.connect(mongoURI)
 app.use(cors())
 app.use(express.json())
 //Santize
-app.use(xss())
+app.use(xss()) // git add
 app.use(mongoSanitize())
 
 //Passport
