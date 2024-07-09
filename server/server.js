@@ -28,7 +28,7 @@ app.use(express.json())
 //Santize
 app.use(xss()) // git add
 app.use(mongoSanitize())
-
+//added mongo sanitzie
 //Passport
 app.use(passport.initialize())
 passport.use("jwt", jwtStrategy)
