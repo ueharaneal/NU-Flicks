@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { RiGoogleLine } from "react-icons/ri"
+import { upIcon } from "lucide-react"
 
 const baseSchema = z.object({
 	email: zodEmail(),
